@@ -169,7 +169,7 @@ public class HotelReservationSystem {
             System.out.println("Remaining Guests: " + guestNamesList.size());
             System.out.println("+=======================================================+\n");
         } else {
-            System.out.println("This bed is already available.");
+            System.out.println("Bed available.");
         }
     }
 }
