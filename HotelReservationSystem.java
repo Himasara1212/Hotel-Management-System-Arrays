@@ -60,8 +60,8 @@ public class HotelReservationSystem {
             switch (choice) {
                 case 1: bookRoom(); 
                 break;
-                // case 2: cancelBooking(); 
-                // break;
+                case 2: cancelBooking(); 
+                break;
                 // case 3: viewAvailableRooms(); 
                 // break;
                 // case 4: viewAllBookings(); 
@@ -78,7 +78,7 @@ public class HotelReservationSystem {
             }
         }
     }
-    
+
     public static void bookRoom() {
         System.out.print("Enter floor number : ");
         int floor = sc.nextInt();
@@ -122,6 +122,54 @@ public class HotelReservationSystem {
             
         } else {
             System.out.println("This bed booked: " + hotelBuilding[floor][room][bed]);
+        }
+    }
+
+    public static void cancelBooking() {
+        System.out.println("\n+=======================================================+");
+        System.out.println("|                  ROOM BOOKING CANCEL                  |");
+        System.out.println("+=======================================================+");
+            
+        System.out.print("Enter floor number: ");
+        int floor = sc.nextInt();
+
+        if (floor < 0 || floor >= hotelBuilding.length) {
+            System.out.println("Invalid floor");
+            return;
+        }
+
+        System.out.print("Enter room number: ");
+        int room = sc.nextInt();
+
+        if (room < 0 || room >= hotelBuilding[0].length) {
+            System.out.println("Invalid room");
+            return;
+        }
+
+        System.out.print("Enter bed number: ");
+        int bed = sc.nextInt();
+
+        if (bed < 0 || bed >= hotelBuilding[0][0].length) {
+            System.out.println("Invalid bed");
+            return;
+        }
+
+        if (!hotelBuilding[floor][room][bed].equals("Available")) {
+            String guestName = hotelBuilding[floor][room][bed];
+
+            hotelBuilding[floor][room][bed] = "Available";
+            
+            guestNamesList.remove(guestName);
+            
+            System.out.println("\n+=======================================================+");
+            System.out.println("|                BOOKING CANCELLED SUCCESSFULLY          |");
+            System.out.println("+=======================================================+");
+            System.out.println("Location : Floor " + floor + ", Room " + room + ", Bed " + bed);
+            System.out.println("Guest: " + guestName);
+            System.out.println("Remaining Guests: " + guestNamesList.size());
+            System.out.println("+=======================================================+\n");
+        } else {
+            System.out.println("This bed is already available.");
         }
     }
 }
