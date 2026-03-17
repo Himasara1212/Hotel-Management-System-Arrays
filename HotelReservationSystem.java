@@ -62,8 +62,8 @@ public class HotelReservationSystem {
                 break;
                 case 2: cancelBooking(); 
                 break;
-                // case 3: viewAvailableRooms(); 
-                // break;
+                case 3: viewAvailableRooms(); 
+                break;
                 // case 4: viewAllBookings(); 
                 // break;
                 // case 5: generateBill(); 
@@ -162,7 +162,7 @@ public class HotelReservationSystem {
             guestNamesList.remove(guestName);
             
             System.out.println("\n+=======================================================+");
-            System.out.println("|                BOOKING CANCELLED SUCCESSFULLY          |");
+            System.out.println("|                BOOKING CANCELED SUCCESSFULLY          |");
             System.out.println("+=======================================================+");
             System.out.println("Location : Floor " + floor + ", Room " + room + ", Bed " + bed);
             System.out.println("Guest: " + guestName);
@@ -171,5 +171,38 @@ public class HotelReservationSystem {
         } else {
             System.out.println("Bed available.");
         }
+    }
+    public static void viewAvailableRooms() {
+        System.out.println("\n+=======================================================+");
+        System.out.println("|                  AVAILABLE ROOMS                      |");
+        System.out.println("+=======================================================+");
+        
+        int availableCount = 0;
+        boolean foundAvailable = false;
+        
+        for (int floor = 0; floor < hotelBuilding.length; floor++) {
+            for (int room = 0; room < hotelBuilding[0].length; room++) {
+                for (int bed = 0; bed < hotelBuilding[0][0].length; bed++) {
+                    
+                    if (hotelBuilding[floor][room][bed].equals("Available")) {
+                        if (!foundAvailable) {
+                            System.out.println("Available beds:");
+                            foundAvailable = true;
+                        }
+                        
+                        System.out.println("Floor " + floor + ", Room " + room + ", Bed " + bed);
+                        availableCount++;
+                    }
+                }
+            }
+        }
+        
+        if (!foundAvailable) {
+            System.out.println("No beds available");
+        } else {
+            System.out.println("\nTotal available beds: " + availableCount);
+        }
+        
+        System.out.println("+=======================================================+\n");
     }
 }
